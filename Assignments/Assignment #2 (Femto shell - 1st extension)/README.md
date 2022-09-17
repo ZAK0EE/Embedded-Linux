@@ -7,6 +7,17 @@ cd ..
 gcc -o femto_shell  main.c -I ./include/ -lfemtomath -L ./libfiles/
 
 ```
+
+# Creating dynamic library & compiling
+```
+cd libfiles
+gcc -c -fPIC *.c
+gcc -shared *.o -o libfemtomath.so
+cd .. 
+gcc -o femto_shell  main.c -I ./include/ -lfemtomath -L ./libfiles/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libfiles
+
+```
 # Test case
 ```
 ./femto_shell
