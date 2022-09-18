@@ -1,23 +1,28 @@
-# Creating static library & compiling
+# Creating static library
 ```
 cd libfiles
 gcc -c *.c
 ar -rs libfemtomath.a *.o
 cd ..
-gcc -o femto_shell  main.c -I ./include/ -lfemtomath -L ./libfiles/
 
 ```
 
-# Creating dynamic library & compiling
+# Creating dynamic library
 ```
 cd libfiles
 gcc -c -fPIC *.c
 gcc -shared *.o -o libfemtomath.so
 cd .. 
-gcc -o femto_shell  main.c -I ./include/ -lfemtomath -L ./libfiles/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./libfiles
 
 ```
+
+# Compiling
+```
+gcc -o femto_shell  main.c -I ./include/ -lfemtomath -L ./libfiles/
+
+```
+
 # Test case
 ```
 ./femto_shell
