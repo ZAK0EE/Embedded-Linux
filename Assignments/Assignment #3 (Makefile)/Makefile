@@ -1,10 +1,10 @@
 #@Ziad (Learn-in-Depth)
 
 CC=
-LIB_PATH= .
+LIB_PATH= . 
 CFLAGS= -std=c11 -O0 -Wall -g
 INCS= ./include
-LIBS= -lrt 
+LIBS= rt 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 As  = $(wildcard *.s)
@@ -13,6 +13,7 @@ Project_name = Femto_Shell
 STATIC=YES
 all: $(Project_name)
 	@echo ====================== Build Succeded ======================
+
 %.o: %.c
 	$(CC)gcc $(CFLAGS) -c  -I $(INCS)  $< -o $@
 %.o: %.s
