@@ -5,7 +5,7 @@ OBJ_DIR := build/obj
 BIN_DIR := build/bin
 
 
-EXE := $(BIN_DIR)/Femto_Project
+EXE := $(BIN_DIR)/echo
 SRC := $(wildcard $(SRC_DIR)/*.c)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
