@@ -5,7 +5,21 @@ make
 
 # Test case
 ```
-> cd ./build/bin/
-> ./pwd 
-/home/ziad/Embedded_Linux/Embedded-Linux/Assignments/Assignment #4 (Femto Unix Utilities (pwd, echo, cp, mv))/pwd/build/bin
+> cd build/bin/
+> echo "Hello, world!" > source.c
+> ./mv
+[ERROR] mv: missing file operand
+mv [src] [dst]
+> ./mv source.c 
+[ERROR] mv: missing file operand
+mv [src] [dst]
+> ./mv source.c source.c 
+[ERROR] mv: 'source.c' and 'source.c' are the same file
+> ./mv source.c ./source.c 
+[ERROR] mv: 'source.c' and './source.c' are the same file
+> ./mv source.c dest.c
+> cat dest.c 
+Hello, world!
+> ls
+dest.c  mv
 ```
