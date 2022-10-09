@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
     if(same_file(fd_src, fd_dst) == 1)
     {
         printf("[ERROR] cp: \'%s\' and \'%s\' are the same file\n", argv[1], argv[2]);
+        return 0;
     }
 
 
