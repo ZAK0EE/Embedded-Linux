@@ -1,37 +1,69 @@
-#@Ziad (Learn-in-Depth)
+CC=gcc
 
-CC=
-LIB_PATH= . 
-CFLAGS= -std=c11 -O0 -Wall -g
-INCS= ./include
-LIBS= rt 
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
-As  = $(wildcard *.s)
-AsOBJ = $(As:.s=.o)
-Project_name = Femto_Shell
-STATIC=YES
-all: $(Project_name)
-	@echo ====================== Build Succeded ======================
+SRC_DIR := src
+SRC_SUB:= $(dir $(wildcard $(SRC_DIR)/*/))
 
-%.o: %.c
-	$(CC)gcc $(CFLAGS) -c  -I $(INCS)  $< -o $@
-%.o: %.s
-	$(CC)as $(CFLAGS) -c  $(INCS) $< -o $@
-$(Project_name): $(OBJ) $(AsOBJ)
-	$(CC)gcc  $(CFLAGS) $^ -I $(INCS) -l$(LIBS) -L $(LIB_PATH)  -o $@
-%.a: 
-		$(CC)gcc -c *.c
-		ar -rs $@ *.o
-%.so:
-		$(CC)gcc -c -fPIC *.c
-		$(CC)gcc -shared *.o -o $@
+BUILD_DIR := build
+OBJ_DIR := $(BUILD_DIR)/obj
+DIRS := $(OBJ_DIR) $(OBJ_DIR)/femto_utilities
+BIN_DIR := $(BUILD_DIR)/bin
 
+LIB_SRC := libfiles
+LIB_DIR := $(BUILD_DIR)/libfiles
+
+EXE := $(BIN_DIR)/Femto_Shell
+SRC := $(wildcard $(SRC_DIR)/*.c  $(SRC_DIR)/*/*.c) 
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+CPPFLAGS := -Iinclude
+CFLAGS   := -Wall
+LDFLAGS  := -lfemtomath
+LDLIBS   :=  -L $(LIB_DIR)
+
+SHARED=NO
+
+ifeq ($(SHARED), NO)
+LIB_TYPE =libfemtomath.a
+else ifeq ($(SHARED), YES)
+LIB_TYPE =libfemtomath.so
+endif
+
+.PHONY: all clean
+
+all: $(EXE)
+
+$(EXE): $(OBJ)| $(BIN_DIR)  library
+	$(CC)    $^  $(LDFLAGS) $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(DIRS)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+		
+$(LIB_DIR)/%.o: $(LIB_SRC)/%.c | $(LIB_DIR)
+ifeq ($(SHARED), NO)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+else ifeq ($(SHARED), YES)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -fPIC $< -o $@
+endif
+	
+	
+	
+library: $(LIB_DIR)/$(LIB_TYPE) 
+
+$(LIB_DIR)/%.a: build/libfiles/femto_fact.o  build/libfiles/femto_fib.o build/libfiles/femto_rand.o 
+		ar -rs $@ $^
+
+
+		
+%.so: build/libfiles/femto_fact.o  build/libfiles/femto_fib.o build/libfiles/femto_rand.o 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -shared $^ -o $@
+	
+		
+$(BIN_DIR) $(DIRS) $(LIB_DIR):
+	mkdir -p $@
 	
 
-	
 
-clean_all:
-	@rm -f *.o *.exe $(Project_name)
 clean:
-	@rm -f $(Project_name)
+	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR) $(LIB_DIR)
+
+-include $(OBJ:.o=.d)
