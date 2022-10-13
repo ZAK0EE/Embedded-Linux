@@ -25,16 +25,26 @@ int Femto_ParseInput()
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
     char* saveptr = NULL; 
     char* token = NULL;
+    char *alloc_token = NULL;
 
+    // tokenizing the input
     saveptr = buff;
-    while((token = strtok_r(saveptr, " ", &saveptr)) != NULL)
+    while((token = strtok_r(saveptr, " \n ", &saveptr)) != NULL)
     {
-        femto_argv[femto_argc++] = token; // token is allocated memory inside strtok_r
+        alloc_token = strdup(token);
+        femto_argv[femto_argc++] = alloc_token; // token is allocated memory inside strdup_
     }
-
+    
+    /* 
+    // For debugging
     for(int i = 0; femto_argv[i] != NULL; i++)
     {
-        printf("argv[i]: %s\n", femto_argv[i]);
+        printf("argv[%d]: %s\n", i, femto_argv[i]);
+    }
+    */
+    return 1;
+}
+
 int Femto_Deconstruct()
 {
     // Free allocated memory to the tokens
@@ -57,7 +67,6 @@ int Femto_Shell()
         // Femto_Localvar();
         // Femto_ExecBuiltin();
         // Femto_ExecExternal();
-        //Femto_Deconstruct();
         Femto_Deconstruct();
     }
 
