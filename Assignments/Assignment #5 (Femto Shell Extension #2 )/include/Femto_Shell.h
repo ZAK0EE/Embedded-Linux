@@ -14,3 +14,13 @@ int Femto_Shell();
 * @return 1 on sucess
 */
 int Femto_ParseInput();
+
+
+/**
+* @brief This function deconstructs the shell loop and frees any allocated memory
+*
+* @Note This function does not terminate the shell
+*
+* @return 1 on sucess
+*/
+int Femto_Deconstruct();
