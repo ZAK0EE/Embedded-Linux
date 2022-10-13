@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "Femto_Shell.h"
 
@@ -34,6 +35,14 @@ int Femto_ParseInput()
     for(int i = 0; femto_argv[i] != NULL; i++)
     {
         printf("argv[i]: %s\n", femto_argv[i]);
+int Femto_Deconstruct()
+{
+    // Free allocated memory to the tokens
+    while(femto_argc > 0)
+    {
+        femto_argc--;
+        free(femto_argv[femto_argc]);
+        femto_argv[femto_argc] = NULL;
     }
 
     return 1;
@@ -49,6 +58,7 @@ int Femto_Shell()
         // Femto_ExecBuiltin();
         // Femto_ExecExternal();
         //Femto_Deconstruct();
+        Femto_Deconstruct();
     }
 
     return 1;        
