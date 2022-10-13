@@ -1,2 +1,2 @@
-void femto_fib(int count);
+int femto_fib();
 

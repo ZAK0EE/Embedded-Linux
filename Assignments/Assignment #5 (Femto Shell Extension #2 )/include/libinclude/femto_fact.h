@@ -1,1 +1,1 @@
-unsigned long long femto_fact(int n);
+int femto_fact();

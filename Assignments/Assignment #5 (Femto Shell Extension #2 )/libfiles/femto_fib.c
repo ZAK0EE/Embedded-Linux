@@ -1,7 +1,12 @@
 #include <stdio.h>
 
-void femto_fib(int count)
+int femto_fib()
 {
+	int count;
+	printf("Enter a number: ");
+	scanf("%d", &count);
+			
+	printf("The sequence is: ");
 
 	int first_term = 0, second_term = 1, next_term;
 
@@ -23,5 +28,7 @@ void femto_fib(int count)
 	}
 
 	printf("\n");
+	
+	return 1;
 
 }
