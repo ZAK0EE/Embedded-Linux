@@ -10,6 +10,8 @@ BIN_DIR := $(BUILD_DIR)/bin
 
 LIB_SRC := libfiles
 LIB_DIR := $(BUILD_DIR)/libfiles
+LIB_FILES := $(wildcard $(LIB_SRC)/*.c  )
+LIB_OBJ := $(LIB_FILES:$(LIB_SRC)/%.c=$(LIB_DIR)/%.o)
 
 EXE := $(BIN_DIR)/Femto_Shell
 SRC := $(wildcard $(SRC_DIR)/*.c  $(SRC_DIR)/*/*.c) 
@@ -49,12 +51,12 @@ endif
 	
 library: $(LIB_DIR)/$(LIB_TYPE) 
 
-$(LIB_DIR)/%.a: build/libfiles/femto_fact.o  build/libfiles/femto_fib.o build/libfiles/femto_rand.o 
+$(LIB_DIR)/%.a: $(LIB_OBJ)
 		ar -rs $@ $^
 
 
 		
-%.so: build/libfiles/femto_fact.o  build/libfiles/femto_fib.o build/libfiles/femto_rand.o 
+$(LIB_DIR)/%.so: $(LIB_OBJ)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -shared $^ -o $@
 	
 		
