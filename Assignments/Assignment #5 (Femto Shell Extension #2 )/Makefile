@@ -5,7 +5,9 @@ SRC_SUB:= $(dir $(wildcard $(SRC_DIR)/*/))
 
 BUILD_DIR := build
 OBJ_DIR := $(BUILD_DIR)/obj
-DIRS := $(OBJ_DIR) $(OBJ_DIR)/femto_utilities
+SRC_SUBDIR := $(shell basename -a src/*/ | paste -d ' ' -s -)
+DIRS := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/,$(SRC_SUBDIR))
+
 BIN_DIR := $(BUILD_DIR)/bin
 
 LIB_SRC := libfiles
@@ -31,6 +33,7 @@ LIB_TYPE =libfemtomath.so
 endif
 
 .PHONY: all clean
+
 
 all: $(EXE)
 
