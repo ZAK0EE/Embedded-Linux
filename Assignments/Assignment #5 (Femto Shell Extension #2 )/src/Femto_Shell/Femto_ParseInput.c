@@ -21,6 +21,7 @@ int Femto_ParseInput()
 
     printf("Please enter your command > ");
 
+    if((fgets(buff, sizeof(buff), stdin) == NULL) || buff[0]=='\n')
         return 0;
 
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
