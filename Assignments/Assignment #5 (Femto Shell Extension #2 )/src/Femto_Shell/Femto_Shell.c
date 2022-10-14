@@ -3,7 +3,7 @@
 #include "Femto_Shell.h"
 #include "Femto_ParseInput.h"
 #include "Femto_ExecBuiltin.h"
-
+#include "Femto_ExecExternal.h"
 
 
 int Femto_Deconstruct()
@@ -27,7 +27,7 @@ int Femto_Shell()
             continue;
         // Femto_Localvar();
         Femto_ExecBuiltin();
-        // Femto_ExecExternal();
+        Femto_ExecExternal();
         Femto_Deconstruct();
     }
 
