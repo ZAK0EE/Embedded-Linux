@@ -32,7 +32,7 @@ int Femto_ParseInput()
 
     // tokenizing the input
     saveptr = buff;
-    while((token = strtok_r(saveptr, " \t\n", &saveptr)) != NULL)
+    while((token = strtok_r(saveptr, " ;\t\n", &saveptr)) != NULL)
     {
         alloc_token = strdup(token);
         femto_argv[femto_argc++] = alloc_token; // token is allocated memory inside strdup_
