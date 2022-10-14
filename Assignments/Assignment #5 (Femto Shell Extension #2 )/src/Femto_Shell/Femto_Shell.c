@@ -23,9 +23,8 @@ int Femto_Shell()
 {
     while(1)
     {
-//        if(femto_argc == 0)
-           if( !Femto_ParseInput())
-                continue;
+        if(!Femto_ParseInput())
+            continue;
         // Femto_Localvar();
         Femto_ExecBuiltin();
         // Femto_ExecExternal();
