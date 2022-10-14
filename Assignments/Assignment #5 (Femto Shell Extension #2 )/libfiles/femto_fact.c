@@ -4,8 +4,11 @@ int femto_fact()
 {
 	int n;
 	printf("Enter a number: ");
-	scanf("%d", &n);
 	
+	char buf[100];
+	fgets(buf, sizeof(buf), stdin);
+	sscanf(buf, "%d", &n);
+
 	if(n < 0)
 		return -1;
 

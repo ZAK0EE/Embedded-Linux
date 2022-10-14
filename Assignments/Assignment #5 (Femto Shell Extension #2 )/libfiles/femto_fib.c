@@ -4,7 +4,12 @@ int femto_fib()
 {
 	int count;
 	printf("Enter a number: ");
-	scanf("%d", &count);
+
+
+	char buf[100];
+	fgets(buf, sizeof(buf), stdin);
+	sscanf(buf, "%d", &count);
+	
 			
 	printf("The sequence is: ");
 
