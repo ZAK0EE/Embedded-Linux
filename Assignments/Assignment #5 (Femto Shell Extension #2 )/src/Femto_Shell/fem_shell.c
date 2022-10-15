@@ -25,8 +25,13 @@ int fem_shell()
         if(!fem_parser_input())
             continue;
         // fem_Localvar();
-        fem_exec_builtin(parser_argv[token_idx]);
-        fem_exec_external(parser_argv[token_idx], &parser_argv[token_idx]);
+        for(int i = parser_cmdidx; i < parser_cmdc; i++)
+        {
+		    fem_exec_builtin(*parser_cmdv[i]);
+		    fem_exec_external(*parser_cmdv[i],  parser_cmdv[i]);        
+        }
+        
+		parser_cmdidx = 0;
         fem_deconstruct();
     }
 
