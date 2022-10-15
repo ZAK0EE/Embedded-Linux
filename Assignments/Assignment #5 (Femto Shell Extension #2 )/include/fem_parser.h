@@ -1,14 +1,14 @@
-#ifndef FEMTO_PARSEINPUT_H
-#define FEMTO_PARSEINPUT_H
+#ifndef FEM_PARSER_H
+#define FEM_PARSER_H
 
-#define FEMTO_MAX_ARGV 100
+#define PARSER_MAX_ARGV 100
 
 // Stores the input tokens as arugment variables
-char* femto_argv[FEMTO_MAX_ARGV];
+char* parser_argv[PARSER_MAX_ARGV];
 
 
 // Stores the number of tokens
-int femto_argc;
+int parser_argc;
 
 // The current token index
 int token_idx;
@@ -18,7 +18,7 @@ int token_idx;
 *
 * @return 1 on sucess
 */
-int Femto_ParseInput();
+int fem_parser_input();
 
 
-#endif /* FEMTO_PARSEINPUT_H */
+#endif /* FEM_PARSER_H */

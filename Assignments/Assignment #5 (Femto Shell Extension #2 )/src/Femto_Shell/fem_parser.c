@@ -2,20 +2,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "Femto_ParseInput.h"
+#include "fem_parser.h"
 
 
 // Stores the input tokens as arugment variables
-char* femto_argv[FEMTO_MAX_ARGV] = {NULL};
+char* parser_argv[PARSER_MAX_ARGV] = {NULL};
 
 
 // Stores the number of tokens
-int femto_argc = 0; 
+int parser_argc = 0; 
 
 // The current token index
 int token_idx = 0;
 
-int Femto_ParseInput()
+int fem_parser_input()
 {
     char buff[500] = {0};
 
@@ -35,17 +35,17 @@ int Femto_ParseInput()
     while((token = strtok_r(saveptr, " ;\t\n", &saveptr)) != NULL)
     {
         alloc_token = strdup(token);
-        femto_argv[femto_argc++] = alloc_token; // token is allocated memory inside strdup_
+        parser_argv[parser_argc++] = alloc_token; // token is allocated memory inside strdup_
     }
 
     // No tokens parsed
-    if(femto_argc == 0)
+    if(parser_argc == 0)
         return 0;
 
 //    // For debugging
-//    for(int i = 0; femto_argv[i] != NULL; i++)
+//    for(int i = 0; parser_argv[i] != NULL; i++)
 //    {
-//        printf("argv[%d]: %s\n", i, femto_argv[i]);
+//        printf("argv[%d]: %s\n", i, parser_argv[i]);
 //    }
 //
     return 1;
