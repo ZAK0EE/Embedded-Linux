@@ -24,7 +24,7 @@ int Femto_ParseInput()
     char* ret;
     if(( (ret = fgets(buff, sizeof(buff), stdin)) == NULL) || buff[0]=='\n')
         return 0;
-
+    
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
     char* saveptr = NULL; 
     char* token = NULL;
@@ -37,6 +37,10 @@ int Femto_ParseInput()
         alloc_token = strdup(token);
         femto_argv[femto_argc++] = alloc_token; // token is allocated memory inside strdup_
     }
+
+    // No tokens parsed
+    if(femto_argc == 0)
+        return 0;
 
 //    // For debugging
 //    for(int i = 0; femto_argv[i] != NULL; i++)
