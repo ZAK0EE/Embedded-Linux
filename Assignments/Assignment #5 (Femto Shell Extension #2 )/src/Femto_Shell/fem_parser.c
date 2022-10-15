@@ -22,6 +22,19 @@ int parser_cmdc = 0;
 // Stores the index of current cmd in parser_cmdv
 int parser_cmdidx = 0;
 
+int parser_commaExisted(char* from, char* to)
+{
+	for(char *i = from; i <= to; i++)
+	{
+		if(*i == ';')
+		{
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
 
 int fem_parser_input()
 {
@@ -41,25 +54,38 @@ int fem_parser_input()
     int tok_idx = -1; // token idx in the org_buff
     
     char *alloc_token = NULL;
-
+	
 	char* strtok_buff = strdup(org_buff);
+	
+	char* last_tok = NULL;
     // tokenizing the input
     saveptr = strtok_buff;
     while(parser_argc < PARSER_MAX_ARGV && parser_cmdc < PARSER_MAX_CMDV  &&
      (token = strtok_r(saveptr, " ;\t\n", &saveptr)) != NULL)
     {
-    	tok_idx = (token - strtok_buff);
+
     	
-    	// Check if the delimiter is ';'
-    	if(parser_cmdc == 0 || org_buff[tok_idx - 1] == ';')
+    	if(parser_cmdc == 0)
     	{
-    			
-    		if(parser_cmdc != 0)
-    			parser_argv[parser_argc++] = NULL;
-    			
     		parser_cmdv[parser_cmdc++] = &parser_argv[parser_argc];
+    	}
+    	// Check if the delimiter is ';'
+    	else 
+    	{
+    		// Detect the range of the delimiters between the two tokens
+ 		    tok_idx = (token - strtok_buff);
+    		char* from = ((last_tok - strtok_buff) + strlen(last_tok)) + org_buff;
+    		char* to = (tok_idx - 1) + org_buff;
     		
+    		if(parser_commaExisted(from, to))
+    		{
+    			parser_argv[parser_argc++] = NULL;	
+    			parser_cmdv[parser_cmdc++] = &parser_argv[parser_argc];    		
+    		}
+
 		}
+		
+		last_tok = token;
 		
         alloc_token = strdup(token);
         parser_argv[parser_argc++] = alloc_token; // token is allocated memory inside strdup_

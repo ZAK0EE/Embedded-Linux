@@ -32,6 +32,7 @@ int fem_shell()
         }
         
 		parser_cmdidx = 0;
+		parser_cmdc = 0;
         fem_deconstruct();
     }
 
