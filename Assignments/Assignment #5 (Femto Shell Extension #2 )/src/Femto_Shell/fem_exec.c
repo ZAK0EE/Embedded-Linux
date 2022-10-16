@@ -31,12 +31,11 @@ int fem_exec_builtin(char* cmd)
     {
         if(strcmp(cmd, builtin_commands[i].name) == 0)
         {
-            builtin_commands[i].call();
-            break;
+            return builtin_commands[i].call();
         }
     }
     
-    return 1;
+    return 0;
 }
 
 int fem_exec_external(char* cmd, char* argv[])
