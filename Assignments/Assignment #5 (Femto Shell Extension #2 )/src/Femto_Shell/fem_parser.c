@@ -22,6 +22,14 @@ int parser_cmdc = 0;
 // Stores the index of current cmd in parser_cmdv
 int parser_cmdidx = 0;
 
+/**
+* @brief This function detects if ';' existed in the given range
+*
+* @param from the starting pointer of the range
+* @param to the ending pointer of the range inclusively
+*
+* @return 
+*/
 int parser_commaExisted(char* from, char* to)
 {
 	for(char *i = from; i <= to; i++)
