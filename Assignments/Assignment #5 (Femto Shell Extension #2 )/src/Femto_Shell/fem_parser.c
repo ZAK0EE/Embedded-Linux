@@ -48,9 +48,10 @@ int fem_parser_input()
 {
 	// original buffer, DONOT modify
     char org_buff[500] = {0};
-
+	
+	
     printf("Please enter your command > ");
-
+fflush(stdout);
     char* ret;
     if(( (ret = fgets(org_buff, sizeof(org_buff), stdin)) == NULL) || org_buff[0]=='\n')
         return 0;
@@ -103,11 +104,13 @@ int fem_parser_input()
     if(parser_argc == 0)
         return 0;
 
-//    // For debugging
-//    for(int i = 0; parser_argv[i] != NULL; i++)
-//    {
-//        printf("argv[%d]: %s\n", i, parser_argv[i]);
-//    }
-//
     return 1;
+}
+
+char **parser_getNextcmd()
+{
+	if(parser_cmdv[parser_cmdidx] == NULL)
+		return NULL;
+		
+	return parser_cmdv[parser_cmdidx++];
 }

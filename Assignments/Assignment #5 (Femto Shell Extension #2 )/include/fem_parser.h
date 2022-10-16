@@ -23,9 +23,20 @@ int parser_cmdidx;
 /**
 * @brief This function parses the input and stores tokens
 *
-* @return 1 on sucess
+* @return 1 on sucess and 0 on failure
 */
 int fem_parser_input();
+
+
+/**
+* @brief This function returns a pointer to a command name
+*
+* @return pointer to a pointer to command name on sucess and NULL on failure
+*
+* @Note You can -and should- use this pointer to pointer as a pointer to an array of arguments like argv[]
+* As the command name is followed by its arguments in a null-termianted string
+*/
+char **parser_getNextcmd();
 
 
 #endif /* FEM_PARSER_H */
