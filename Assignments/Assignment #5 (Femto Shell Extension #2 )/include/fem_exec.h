@@ -26,6 +26,13 @@ typedef struct
 int fem_exec(char* cmd, char* argv[], char* envp[]);
 
 
+/**
+* @brief This function parses the given cmd as an assignment
+*
+* @param cmd the assignment string
+*
+* @return returns 1 on success and 0 on failure
+*/
 int fem_exec_assign(char* cmd);
 
 
