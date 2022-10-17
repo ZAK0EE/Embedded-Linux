@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include <unistd.h>
 #include <stdio.h>
@@ -36,7 +37,7 @@ int fem_exec(char* cmd, char* argv[])
 	}
 	else
 	{
-		printf("%s: command was not found/n", cmd);
+		printf("%s: command was not found\n", cmd);
 	}
 	
 	return 0;
@@ -63,17 +64,20 @@ int fem_exec_external(char* cmd, char* argv[])
 
     if(ret_pid < 0)
     {
-        printf("This msg won't be printed on sucess\n");
+    	printf("Failed to execute\n");
     }
     else if(ret_pid > 0)
     {
         wait(&status);
+        // Failed to execute
+        if(WEXITSTATUS(status) == (unsigned char)-1)
+        	return 0;
     }
     else if(ret_pid == 0)
     {
-        execvpe(cmd, argv, NULL);
+       execvpe(cmd, argv, NULL);
+       exit(-1); // In case, exec failed
     }
-
-
+    
     return 1;
 }
