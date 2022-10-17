@@ -37,6 +37,26 @@ int femto_set(char* argv[]);
 int femto_export(char* argv[]);
 
 
+/**
+* @brief this function exits the shell
+*
+* @param argv[] pointer to the array of arguments that will be passed to the builtin program
+*
+* @return returns 1 on success and 0 on failure
+*/
+int femto_exit(char* argv[]);
+
+
+/**
+* @brief this function prints help messages for local functions
+*
+* @param argv[] pointer to the array of arguments that will be passed to the builtin program
+*
+* @return returns 1 on success and 0 on failure
+*/
+int femto_help(char* argv[]);
+
+
 command builtin_commands[] =
 {
     {"rand" ,femto_rand},
@@ -44,6 +64,8 @@ command builtin_commands[] =
     {"fact", femto_fact},
     {"set", femto_set},
     {"export", femto_export},
+    {"help", femto_help},
+    {"exit", femto_exit},
     {NULL, NULL}
 };
 
@@ -87,6 +109,28 @@ int femto_export(char* argv[])
 	return 1;
 }
 
+
+int femto_exit(char* argv[])
+{
+	exit(0);
+}
+
+
+int femto_help(char* argv[])
+{
+	printf(
+	"***Built-in commands***\n"
+	"rand: prints a random number\n"
+	"fib: prints Fibonacci sequence\n"
+	"fact: prints factorial number\n"
+	"set: prints local variables\n"
+	"export: exports the variable to environment\n"
+	"help: shows a brief about built-in commands\n"
+	"exit: exits the shell\n"
+	);
+	
+	return 1;
+}
 //****************************************************************************************************************
 
 int fem_exec(char* cmd, char* argv[], char* envp[])
