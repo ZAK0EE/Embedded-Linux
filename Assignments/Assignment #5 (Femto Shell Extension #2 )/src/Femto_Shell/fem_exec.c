@@ -126,6 +126,7 @@ int fem_exec_assign(char* cmd)
 	
 	char* left = strndup(cmd, assign_idx);
 	char* right = strdup(&cmd[assign_idx + 1]);
+	
 	// Check if variable exists
 	for(int i = 0; i < exec_localc; i++)
 	{
