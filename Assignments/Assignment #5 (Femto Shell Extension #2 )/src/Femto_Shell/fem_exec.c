@@ -87,6 +87,7 @@ int femto_export(char* argv[])
 	return 1;
 }
 
+//****************************************************************************************************************
 
 int fem_exec(char* cmd, char* argv[], char* envp[])
 {
@@ -122,9 +123,24 @@ int fem_exec_assign(char* cmd)
 		return 0;
 		
 	int assign_idx = ret - cmd;
-
-	exec_local[exec_localc].left = strndup(cmd, assign_idx);
-	exec_local[exec_localc].right = strdup(&cmd[assign_idx + 1]);
+	
+	char* left = strndup(cmd, assign_idx);
+	char* right = strdup(&cmd[assign_idx + 1]);
+	// Check if variable exists
+	for(int i = 0; i < exec_localc; i++)
+	{
+		if(strcmp(left, exec_local[i].left) == 0)
+		{
+			free(left);
+			free(exec_local[i].right);
+			
+			exec_local[i].right = right;
+			return 1;
+		}
+	}
+	
+	exec_local[exec_localc].left = left;
+	exec_local[exec_localc].right = right;
 	
 	exec_localc++;
 	
