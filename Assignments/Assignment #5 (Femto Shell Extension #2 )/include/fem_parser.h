@@ -38,5 +38,12 @@ int fem_parser_input();
 */
 char **parser_getNextcmd();
 
+/**
+* @brief This function frees any allocated memory and prepares the parser to take a new input
+*
+* @return 1 on sucess and 0 on failure
+*/
+int parser_deconstruct();
+
 
 #endif /* FEM_PARSER_H */

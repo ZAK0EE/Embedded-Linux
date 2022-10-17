@@ -7,15 +7,10 @@
 
 int fem_deconstruct()
 {
-    // Free allocated memory to the tokens
-    while(parser_argc > 0)
-    {
-        parser_argc--;
-        free(parser_argv[parser_argc]);
-        parser_argv[parser_argc] = NULL;
-    }
-
-    return 1;
+	if(!parser_deconstruct())
+		return 0;
+		
+	return 1;
 }
 
 
@@ -25,18 +20,14 @@ int fem_shell()
     {	
         if(!fem_parser_input())
             continue;
-        // fem_Localvar();
 
         char **cmd;
         while( (cmd = parser_getNextcmd()) != NULL)
         {
         	fem_exec(*cmd, cmd, environ);                  
-		    parser_cmdv[parser_cmdidx - 1] = NULL; // to null it after the usage
+
         }
-        
-        parser_cmdidx = 0;
-		parser_cmdc = 0;
-		
+        	
         fem_deconstruct();
     }
 

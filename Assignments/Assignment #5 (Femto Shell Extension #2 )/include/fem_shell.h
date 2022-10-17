@@ -19,4 +19,12 @@ int fem_shell();
 */
 int fem_parser();
 
+
+/**
+* @brief This function frees any allocated memory and prepares the shell to take a new input
+*
+* @return 1 on sucess and 0 on failure
+*/
+int fem_deconstruct();
+
 #endif /* FEM_SHELL_H */

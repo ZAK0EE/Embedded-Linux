@@ -137,3 +137,24 @@ char **parser_getNextcmd()
 		
 	return parser_cmdv[parser_cmdidx++];
 }
+
+
+int parser_deconstruct()
+{
+    // Free allocated memory to the tokens
+    while(parser_argc > 0)
+    {
+        parser_argc--;
+        free(parser_argv[parser_argc]);
+        parser_argv[parser_argc] = NULL;
+    }
+    
+    // NUlling the cmdv array
+    for(int i = 0; i < parser_cmdc; i++)
+    	parser_cmdv[i] = NULL;
+    	
+    parser_cmdidx = 0;
+	parser_cmdc = 0;
+
+    return 1;
+}
