@@ -44,18 +44,36 @@ int parser_commaExisted(char* from, char* to)
 }
 
 
+/**
+* @brief This functions clears the input when input is bigger than the buffer
+*/
+void clear_stdin()
+{
+	int c;
+	while ( (c = getchar()) != '\n' && c != EOF ) { }
+}
+
 int fem_parser_input()
 {
 	// original buffer, DONOT modify
     char org_buff[500] = {0};
-	
-	
+
+
     printf("Please enter your command > ");
-fflush(stdout);
+
+
+
     char* ret;
     if(( (ret = fgets(org_buff, sizeof(org_buff), stdin)) == NULL) || org_buff[0]=='\n')
         return 0;
     
+    // CLear the stdin if input is bigger than the buffer
+    size_t org_len = strlen(org_buff);
+    if(org_buff[org_len -1] != '\n')
+    {
+    	printf("Input has been truncated!\n");
+    	clear_stdin();
+    }
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
     char* saveptr = NULL; 
     
