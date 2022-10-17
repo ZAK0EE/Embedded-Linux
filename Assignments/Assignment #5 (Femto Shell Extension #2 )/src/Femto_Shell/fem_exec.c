@@ -25,13 +25,13 @@ command builtin_commands[] =
 };
 
 
-int fem_exec(char* cmd, char* argv[])
+int fem_exec(char* cmd, char* argv[], char* envp[])
 {
 	if(fem_exec_builtin(cmd))
 	{
 		return 1;
 	}
-	else if(fem_exec_external(cmd, argv))
+	else if(fem_exec_external(cmd, argv, envp))
 	{
 		return 1;
 	}
@@ -57,7 +57,7 @@ int fem_exec_builtin(char* cmd)
     return 0;
 }
 
-int fem_exec_external(char* cmd, char* argv[])
+int fem_exec_external(char* cmd, char* argv[], char* envp[])
 {
     int status = 0;
     int ret_pid = fork();
@@ -75,7 +75,7 @@ int fem_exec_external(char* cmd, char* argv[])
     }
     else if(ret_pid == 0)
     {
-       execvpe(cmd, argv, NULL);
+       execvpe(cmd, argv, envp);
        exit(-1); // In case, exec failed
     }
     

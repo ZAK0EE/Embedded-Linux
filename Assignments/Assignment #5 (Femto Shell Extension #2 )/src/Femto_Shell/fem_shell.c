@@ -18,6 +18,8 @@ int fem_deconstruct()
     return 1;
 }
 
+extern char **environ;
+
 int fem_shell()
 {
     while(1)
@@ -29,7 +31,7 @@ int fem_shell()
         char **cmd;
         while( (cmd = parser_getNextcmd()) != NULL)
         {
-        	fem_exec(*cmd, cmd);                  
+        	fem_exec(*cmd, cmd, environ);                  
 		    parser_cmdv[parser_cmdidx - 1] = NULL; // to null it after the usage
         }
         

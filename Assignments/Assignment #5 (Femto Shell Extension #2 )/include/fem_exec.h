@@ -17,7 +17,7 @@ typedef struct
 *
 * @return       returns 1 on success and 0 on failure
 */
-int fem_exec(char* cmd, char* argv[]);
+int fem_exec(char* cmd, char* argv[], char* envp[]);
 
 /**
 * @brief This function searches in builtin commands and execute if matches the input
@@ -36,6 +36,6 @@ int fem_exec_builtin(char* cmd);
 *
 * @return 
 */
-int fem_exec_external(char* cmd, char* argv[]);
+int fem_exec_external(char* cmd, char* argv[], char* envp[]);
 
 #endif /* FEM_EXEC_H */
