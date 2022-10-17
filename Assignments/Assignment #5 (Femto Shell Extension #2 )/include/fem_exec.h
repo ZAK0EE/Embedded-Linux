@@ -1,6 +1,7 @@
 #ifndef FEM_EXEC_H
 #define FEM_EXEC_H
 
+#define EXEC_MAX_LOCAL 100
 typedef struct
 {
     char* name;
@@ -8,6 +9,11 @@ typedef struct
 } command;
 
 
+typedef struct
+{
+    char* left;
+    char* right;
+} assignment;
 
 /**
 * @brief This function is a wrapper that executes any command
@@ -19,6 +25,10 @@ typedef struct
 */
 int fem_exec(char* cmd, char* argv[], char* envp[]);
 
+
+int fem_exec_assign(char* cmd);
+
+
 /**
 * @brief This function searches in builtin commands and execute if matches the input
 *
@@ -27,6 +37,7 @@ int fem_exec(char* cmd, char* argv[], char* envp[]);
 * @return 
 */
 int fem_exec_builtin(char* cmd);
+
 
 /**
 * @brief This function search for and executes external programs. It returns after the external program terminates

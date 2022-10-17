@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include <unistd.h>
 #include <stdio.h>
@@ -16,18 +17,30 @@
 #include "libinclude/femto_fib.h"
 #include "libinclude/femto_fact.h"
 
+int femto_set();
 command builtin_commands[] =
 {
     {"rand" ,femto_rand},
     {"fib", femto_fib},
     {"fact", femto_fact},
+    {"set", femto_set},
     {NULL, NULL}
 };
+
+// A set of local assignments
+assignment exec_local[EXEC_MAX_LOCAL] = {NULL};
+
+// Stores the number of assignments stored in exec_local
+int exec_localc = 0;
 
 
 int fem_exec(char* cmd, char* argv[], char* envp[])
 {
-	if(fem_exec_builtin(cmd))
+	if(fem_exec_assign(cmd))
+	{
+		return 1;
+	}
+	else if(fem_exec_builtin(cmd))
 	{
 		return 1;
 	}
@@ -43,6 +56,40 @@ int fem_exec(char* cmd, char* argv[], char* envp[])
 	return 0;
 }
 
+
+
+int fem_exec_assign(char* cmd)
+{
+	if(exec_localc == EXEC_MAX_LOCAL || (!isalpha(cmd[0]) && cmd[0] != '_'))
+		return 0;
+	
+	// Assignment index
+	char* ret = strchr(cmd, '=');
+	if(ret == NULL)
+		return 0;
+		
+	int assign_idx = ret - cmd;
+	
+
+	
+	exec_local[exec_localc].left = strndup(cmd, assign_idx);
+	exec_local[exec_localc].right = strdup(&cmd[assign_idx + 1]);
+	
+	exec_localc++;
+	
+	return 1;
+}
+
+int femto_set()
+{
+	for(int i = 0; i < exec_localc; i++)
+	{
+		printf("local_var[%d]: %s = %s\n", i, exec_local[i].left, exec_local[i].right);
+	}
+	
+	return 1;
+}
+
 int fem_exec_builtin(char* cmd)
 {
 
@@ -56,6 +103,7 @@ int fem_exec_builtin(char* cmd)
     
     return 0;
 }
+
 
 int fem_exec_external(char* cmd, char* argv[], char* envp[])
 {
