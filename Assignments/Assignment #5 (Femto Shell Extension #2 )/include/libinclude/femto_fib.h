@@ -1,2 +1,2 @@
-int femto_fib();
+int femto_fib(char* argv[]);
 

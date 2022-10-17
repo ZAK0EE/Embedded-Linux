@@ -40,7 +40,7 @@ int fem_exec(char* cmd, char* argv[], char* envp[])
 	{
 		return 1;
 	}
-	else if(fem_exec_builtin(cmd))
+	else if(fem_exec_builtin(cmd, argv))
 	{
 		return 1;
 	}
@@ -88,14 +88,14 @@ int femto_set()
 	return 1;
 }
 
-int fem_exec_builtin(char* cmd)
+int fem_exec_builtin(char* cmd, char* argv[])
 {
 
     for(int i = 0; builtin_commands[i].name != NULL; i++)
     {
         if(strcmp(cmd, builtin_commands[i].name) == 0)
         {
-            return builtin_commands[i].call();
+            return builtin_commands[i].call(argv);
         }
     }
     

@@ -1,1 +1,1 @@
-int femto_rand(void);
+int femto_rand(char* argv[]);

@@ -1,1 +1,1 @@
-int femto_fact();
+int femto_fact(char* argv[]);

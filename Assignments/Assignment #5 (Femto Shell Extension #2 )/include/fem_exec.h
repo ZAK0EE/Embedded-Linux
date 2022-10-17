@@ -5,7 +5,7 @@
 typedef struct
 {
     char* name;
-    int (*call)();
+    int (*call)(char* argv[]);
 } command;
 
 
@@ -40,10 +40,11 @@ int fem_exec_assign(char* cmd);
 * @brief This function searches in builtin commands and execute if matches the input
 *
 * @param cmd name of the command that will be executed
+* @param argv[] pointer to the array of arguments that will be passed to the builtin program
 *
 * @return 
 */
-int fem_exec_builtin(char* cmd);
+int fem_exec_builtin(char* cmd, char* argv[]);
 
 
 /**
