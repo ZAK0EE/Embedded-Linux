@@ -69,9 +69,7 @@ int fem_exec_assign(char* cmd)
 		return 0;
 		
 	int assign_idx = ret - cmd;
-	
 
-	
 	exec_local[exec_localc].left = strndup(cmd, assign_idx);
 	exec_local[exec_localc].right = strdup(&cmd[assign_idx + 1]);
 	
