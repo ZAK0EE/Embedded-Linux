@@ -22,6 +22,7 @@ int parser_cmdc = 0;
 // Stores the index of current cmd in parser_cmdv
 int parser_cmdidx = 0;
 
+
 /**
 * @brief This function detects if ';' existed in the given range
 *
@@ -52,6 +53,7 @@ void clear_stdin()
 	int c;
 	while ( (c = getchar()) != '\n' && c != EOF ) { }
 }
+
 
 int fem_parser_input()
 {
@@ -124,6 +126,7 @@ int fem_parser_input()
 
     return 1;
 }
+
 
 char **parser_getNextcmd()
 {
