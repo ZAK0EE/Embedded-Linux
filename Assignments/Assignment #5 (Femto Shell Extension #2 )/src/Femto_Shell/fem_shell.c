@@ -29,9 +29,7 @@ int fem_shell()
         char **cmd;
         while( (cmd = parser_getNextcmd()) != NULL)
         {
-        	fem_exec(*cmd, cmd);
-		   // fem_exec_builtin(*cmd);
-		  //  fem_exec_external(*cmd,  cmd);                   
+        	fem_exec(*cmd, cmd);                  
 		    parser_cmdv[parser_cmdidx - 1] = NULL; // to null it after the usage
         }
         
