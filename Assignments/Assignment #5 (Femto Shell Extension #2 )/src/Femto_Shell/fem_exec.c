@@ -24,6 +24,24 @@ command builtin_commands[] =
 };
 
 
+int fem_exec(char* cmd, char* argv[])
+{
+	if(fem_exec_builtin(cmd))
+	{
+		return 1;
+	}
+	else if(fem_exec_external(cmd, argv))
+	{
+		return 1;
+	}
+	else
+	{
+		printf("%s: command was not found/n", cmd);
+	}
+	
+	return 0;
+}
+
 int fem_exec_builtin(char* cmd)
 {
 

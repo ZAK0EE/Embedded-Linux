@@ -7,6 +7,18 @@ typedef struct
     int (*call)();
 } command;
 
+
+
+/**
+* @brief This function is a wrapper that executes any command
+*
+* @param cmd    the name of the file/command
+* @param argv[] the arguments array for the file/command
+*
+* @return       returns 1 on success and 0 on failure
+*/
+int fem_exec(char* cmd, char* argv[]);
+
 /**
 * @brief This function searches in builtin commands and execute if matches the input
 *
