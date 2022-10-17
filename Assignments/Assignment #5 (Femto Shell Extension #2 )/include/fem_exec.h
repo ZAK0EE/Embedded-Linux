@@ -2,6 +2,7 @@
 #define FEM_EXEC_H
 
 #define EXEC_MAX_LOCAL 100
+
 typedef struct
 {
     char* name;
@@ -14,6 +15,14 @@ typedef struct
     char* left;
     char* right;
 } assignment;
+
+
+// A set of local assignments
+assignment exec_local[EXEC_MAX_LOCAL];
+
+// Stores the number of assignments stored in exec_local
+int exec_localc;
+
 
 /**
 * @brief This function is a wrapper that executes any command
