@@ -117,6 +117,8 @@ int fem_parser_input()
         alloc_token = strdup(token);
         parser_argv[parser_argc++] = alloc_token; // token is allocated memory inside strdup_
     }
+    
+    free(strtok_buff);
 
     // No tokens parsed
     if(parser_argc == 0)
