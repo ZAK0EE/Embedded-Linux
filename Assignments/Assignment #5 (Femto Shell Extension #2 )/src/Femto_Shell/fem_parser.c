@@ -87,13 +87,12 @@ int fem_parser_input()
 	char* strtok_buff = strdup(org_buff);
 	
 	char* last_tok = NULL;
+	
     // tokenizing the input
     saveptr = strtok_buff;
     while(parser_argc < PARSER_MAX_ARGV && parser_cmdc < PARSER_MAX_CMDV  &&
      (token = strtok_r(saveptr, " ;\t\n", &saveptr)) != NULL)
     {
-
-    	
     	if(parser_cmdc == 0)
     	{
     		parser_cmdv[parser_cmdc++] = &parser_argv[parser_argc];
@@ -111,7 +110,6 @@ int fem_parser_input()
     			parser_argv[parser_argc++] = NULL;	
     			parser_cmdv[parser_cmdc++] = &parser_argv[parser_argc];    		
     		}
-
 		}
 		
 		last_tok = token;
