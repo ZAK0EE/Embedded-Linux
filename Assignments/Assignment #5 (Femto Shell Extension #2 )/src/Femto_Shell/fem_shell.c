@@ -18,7 +18,6 @@ int fem_deconstruct()
     return 1;
 }
 
-extern char **environ;
 
 int fem_shell()
 {

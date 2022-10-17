@@ -1,6 +1,8 @@
 #ifndef FEM_SHELL_H
 #define FEM_SHELL_H
 
+// A pointer to an array of user environment, passed externally by the parent process
+extern char **environ;
 
 /**
 * @brief This function starts the Femto Shell
