@@ -76,17 +76,19 @@ int fem_parser_input()
     	printf("Input has been truncated!\n");
     	clear_stdin();
     }
+    
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
     char* saveptr = NULL; 
     
-    char* token = NULL;
+    char* token = NULL; // token pointer, returned from strtok
+    
     int tok_idx = -1; // token idx in the org_buff
     
-    char *alloc_token = NULL;
+    char *alloc_token = NULL; // token string but dynamically allocated
 	
-	char* strtok_buff = strdup(org_buff);
+	char* strtok_buff = strdup(org_buff); // strtok_buff duplicating the original buffer to keep the original unmodified
 	
-	char* last_tok = NULL;
+	char* last_tok = NULL; // pointer to the last token in the strtok_buff
 	
     // tokenizing the input
     saveptr = strtok_buff;
