@@ -21,7 +21,7 @@ OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CPPFLAGS := -Iinclude
 CFLAGS   := -Wall -g
-LDFLAGS  := -lfemtomath
+LDFLAGS  := -lfemtomath -lreadline
 LDLIBS   :=  -L $(LIB_DIR)
 
 SHARED=NO

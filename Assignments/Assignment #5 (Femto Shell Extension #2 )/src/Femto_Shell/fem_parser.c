@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<readline/readline.h>
 
 #include "fem_parser.h"
 
@@ -58,23 +59,15 @@ void clear_stdin()
 int fem_parser_input()
 {
 	// original buffer, DONOT modify
-    char org_buff[500] = {0};
+    char *org_buff;
 
+    org_buff = readline("Please enter your command > ");
 
-    printf("Please enter your command > ");
-
-
-
-    char* ret;
-    if(( (ret = fgets(org_buff, sizeof(org_buff), stdin)) == NULL) || org_buff[0]=='\n')
-        return 0;
-    
-    // CLear the stdin if input is bigger than the buffer
+    // Return 0 if no input received    
     size_t org_len = strlen(org_buff);
-    if(org_buff[org_len -1] != '\n')
+    if(org_len == 0)
     {
-    	printf("Input has been truncated!\n");
-    	clear_stdin();
+        return 0;
     }
     
     // The saveptr is used internally by strtok_r() in order to maintain context between successive calls that parse the same string.
@@ -119,7 +112,9 @@ int fem_parser_input()
         alloc_token = strdup(token);
         parser_argv[parser_argc++] = alloc_token; // token is allocated memory inside strdup_
     }
-    
+
+    // free buffers
+    free(org_buff);
     free(strtok_buff);
 
     // No tokens parsed
