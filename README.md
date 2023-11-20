@@ -1,1 +1,1 @@
-Assignments delivered during Linux training with Eng.[Reda Maher](https://www.linkedin.com/in/redamaher/) where we created our own shell, learnt about files system and miscellaneous topics about Linux
+Assignments delivered during Linux training with Eng.[Reda Maher](https://www.linkedin.com/in/redamaher/) - Firmware Engineer at STMicroelectronics - where we created our own shell, learnt about files system and miscellaneous topics about Linux
